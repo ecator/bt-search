@@ -1,0 +1,26 @@
+{
+  "name": "bt-search",
+  "homepage": "https://github.com/ecator/bt-search",
+  "description": "search for bt or magnet",
+  "main": "index.php",
+  "keywords": [
+    "bt"
+  ],
+  "authors": [
+    "ecat"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "react": "^15.4.2"
+  }
+}

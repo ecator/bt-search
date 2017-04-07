@@ -1,0 +1,17 @@
+{
+    "name": "ecator/bt-search",
+    "description": "search for bt or magnet",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Qu",
+            "email": "qule520@gmail.com"
+        }
+    ],
+    "require": {
+        "coderockr/php-query": "dev-master",
+        "hetao29/slightphp": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
