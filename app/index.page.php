@@ -52,9 +52,40 @@ class app_index extends STpl {
             //有关键词参数
             $re->msg="ok";
             $reArr=array_merge(SearchBT::torrentkitty($keyword),SearchBT::cldq($keyword));
+            $this->sortByKeyword(explode(" ",$keyword),$reArr);
             $re->results = $reArr;
         }
         echo json_encode($re);
+    }
+
+    //按照关键词的匹配程度排序
+    private function sortByKeyword($keywords,&$arr){
+        for ($i=0;$i<count($arr);$i++){
+            for ($m=0;$m<count($arr)-$i-1;$m++){
+                if (strlen($this->trimKeywords($keywords,$arr[$m]->title))>strlen($this->trimKeywords($keywords,$arr[$m+1]->title))){
+                    $tmp=$arr[$m];
+                    $arr[$m]=$arr[$m+1];
+                    $arr[$m+1]=$tmp;
+                }elseif (strlen($this->trimKeywords($keywords,$arr[$m]->title))==strlen($this->trimKeywords($keywords,$arr[$m+1]->title))){
+                    //长度相等比较时间
+                    if (strtotime($arr[$m]->date)<strtotime($arr[$m+1]->date)){
+                        $tmp=$arr[$m];
+                        $arr[$m]=$arr[$m+1];
+                        $arr[$m+1]=$tmp;
+                    }
+                }
+            }
+        }
+        return $arr;
+    }
+
+    //替换掉所有关键词
+    private function trimKeywords($keywords,$str){
+        for ($i=0;$i<count($keywords);$i++){
+//            echo $keywords[$i];
+            $str=str_replace($keywords[$i],",",$str);
+        }
+        return $str;
     }
 }
 ?>

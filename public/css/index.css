@@ -1,3 +1,30 @@
 .keyword{
     color: red;
 }
+.result{
+    margin-top: 10px;
+}
+.date{
+    width: 100px;
+}
+.download{
+    width: 70px;
+}
+.index{
+    width: 30px;
+    text-align: left;
+}
+th{
+    border-bottom: gray double 1px;
+    padding-bottom: 5px;
+}
+td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+tr:hover{
+    background-color: #e8e8e8;
+}
+tr:first-child:hover{
+    background-color:white ;
+}

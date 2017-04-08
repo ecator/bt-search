@@ -21,7 +21,9 @@ if (strpos($_SERVER["HTTP_HOST"],"local")===false){
 SlightPHP::setAppDir("..".DIRECTORY_SEPARATOR);
 STpl::$template_dir=__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."template";
 STpl::$compile_dir=__DIR__.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."runtime";
-if(!SlightPHP::run() && !SlightPHP::getDebug()){
+$run=SlightPHP::run();
+//var_dump($run,SlightPHP::getDebug());
+if($run===false && !SlightPHP::getDebug()){
     //服务器环境且没有找到相应页面
     header("location:/404.html");
 }

@@ -49,7 +49,10 @@ class SearchBT
             $item->title=$matches[1][$i];
             $item->date=$matches[2][$i];
             $item->magnet=$matches[3][$i];
-            $items[]=$item;
+            //过滤掉空白标题和无磁力链接项
+            if ($item->title && $item->magnet){
+                $items[]=$item;
+            }
         }
         return $items;
     }
