@@ -42,17 +42,25 @@ class HttpRequest
         }
         $headers = array();
         $headers[] = 'Accept: text/html';
-        $headers[] = 'referer:https://www.inoreader.com/article/3a9c6e7f184fd64b-';
         $headers[] = 'Cache-Control: no-cache';
         $headers[] = 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:28.0) Gecko/20100101 Firefox/28.0';
-        $headers[] = 'X-MicrosoftAjax: Delta=true';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        /**
+         * 由于服务器 liburl有一个bug，需要手动指定cipher
+         * 参考http://stackoverflow.com/questions/31107851/how-to-fix-curl-35-cannot-communicate-securely-with-peer-no-common-encryptio
+         */
+        if(strpos($_SERVER["HTTP_HOST"],"local")===false){
+            curl_setopt($ch,CURLOPT_SSL_CIPHER_LIST,"ecdhe_ecdsa_aes_128_sha");
+        }
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        $cacert=dirname(__FILE__).DIRECTORY_SEPARATOR."cacert.pem";
+        curl_setopt($ch,CURLOPT_CAINFO,$cacert);
         $re=curl_exec($ch);
+        $err=curl_error($ch);
         curl_close($ch);
-        return $re;
+        return $re?$re:$err;
     }
 
 }

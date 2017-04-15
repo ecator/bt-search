@@ -54,8 +54,9 @@ var Result=React.createClass({
             $(".title").each (function () {
                 var title=$(this).text();
                 for (var i=0;i<keywords.length;i++) {
-                    var pattern = new RegExp(keywords[i], "g");
-                    title=title.replace(pattern, "<span class=\"keyword\">" + keywords[i] + "</span>");
+                    // console.log(keywords[i]);
+                    var pattern = new RegExp("("+String(keywords[i])+")", "ig");
+                    title=title.replace(pattern, "<span class=\"keyword\">$1</span>");
                 }
                 $(this).html(title);
             });
@@ -93,6 +94,7 @@ var Result=React.createClass({
 });
 // console.log($("script"));
 var keyword=$("script[type='text/babel']:last").data("keyword");
+keyword=String(keyword);
 ReactDOM.render(
     <Result keyword={keyword} />,
     $('.result')[0]

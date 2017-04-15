@@ -18,6 +18,7 @@ class SearchBT
     static function torrentkitty($keyword){
         $url=self::$torrentkitty.urlencode($keyword);
         $dom=HttpRequest::request("get",$url);
+//        var_dump($dom);
         $dom=phpQuery::newDocumentHTML($dom);
         phpQuery::selectDocument($dom);
         $items=array();

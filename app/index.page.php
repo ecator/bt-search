@@ -51,7 +51,10 @@ class app_index extends STpl {
         }else {
             //有关键词参数
             $re->msg="ok";
-            $reArr=array_merge(SearchBT::torrentkitty($keyword),SearchBT::cldq($keyword));
+            $torrentkitty=SearchBT::torrentkitty($keyword);
+//            var_dump($torrentkitty);
+            $cldq=SearchBT::cldq($keyword);
+            $reArr=array_merge($torrentkitty,$cldq);
             $this->sortByKeyword(explode(" ",$keyword),$reArr);
             $re->results = $reArr;
         }
@@ -83,7 +86,7 @@ class app_index extends STpl {
     private function trimKeywords($keywords,$str){
         for ($i=0;$i<count($keywords);$i++){
 //            echo $keywords[$i];
-            $str=str_replace($keywords[$i],",",$str);
+            $str=str_ireplace($keywords[$i],"",$str);
         }
         return $str;
     }
