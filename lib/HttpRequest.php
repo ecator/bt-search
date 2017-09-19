@@ -47,11 +47,12 @@ class HttpRequest
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         /**
-         * 由于服务器 liburl有一个bug，需要手动指定cipher
+         * 由于腾讯服务器 liburl有一个bug，需要手动指定cipher
          * 参考http://stackoverflow.com/questions/31107851/how-to-fix-curl-35-cannot-communicate-securely-with-peer-no-common-encryptio
          */
         if(strpos($_SERVER["HTTP_HOST"],"local")===false){
-            curl_setopt($ch,CURLOPT_SSL_CIPHER_LIST,"ecdhe_ecdsa_aes_128_sha");
+            //树莓派服务器兼容，树莓派运行需要注释掉下面一句
+            //curl_setopt($ch,CURLOPT_SSL_CIPHER_LIST,"ecdhe_ecdsa_aes_128_sha");
         }
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
