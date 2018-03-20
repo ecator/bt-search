@@ -6,7 +6,7 @@ class app_index extends STpl {
     function PageIndex($inPath){
         $this->assign("title","bt搜～");
         $this->assign("keyword","");
-        return $this->fetch("index.tpl");
+        return $this->render("index.tpl");
     }
     //搜索请求页面
     function PageSearch($inPath){
@@ -15,7 +15,7 @@ class app_index extends STpl {
             //合法请求
             $this->assign("title","bt搜～".$inPath[3]);
             $this->assign("keyword",$inPath[3]);
-            return $this->fetch("index.tpl");
+            return $this->render("index.tpl");
         }else{
             //非法请求，跳转404页面
             header("location:/404.html");

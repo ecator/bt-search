@@ -4,3 +4,5 @@
 /public/bower/
 runtime/
 composer.lock
+/sftp-config.json
+/public/test.php

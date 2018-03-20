@@ -1,13 +1,35 @@
 # bt-search
 磁力链接搜索器
 
+
+## 环境准备
+
+```
+apt install nginx php php-curl php-gd php-xml composer nodejs npm
+npm install -g bower
+composer install
+bower install
+```
+
+## php配置
+以下配置根据实际需要做调整
+```
+extension_dir = "/usr/lib/php/xxxxx"
+cgi.fix_pathinfo = 0
+
+# 建议打开错误调试
+error_reporting = E_ALL
+display_errors = On
+```
+
+
 ## nginx配置
 因为nginx默认不支持PATH_INFO，所以需要做如下特殊配置
 
 ```
 location ~ \.php {
     #fastcgi_pass remote_php_ip:9000;
-    fastcgi_pass unix:/dev/shm/php-cgi.sock;
+    fastcgi_pass unix:/run/php/php7.0-fpm.sock;
     fastcgi_index index.php;
     #PATH_INFO支持#
     fastcgi_split_path_info ^(.+\.php)(.*)$;
@@ -30,3 +52,4 @@ location / {
     }
    }
 ```
+> 重写需在 `location ~ \.php` 之后
