@@ -61,4 +61,8 @@ location / {
 ```
 docker build -t ecat/bt-search-docker .
 ```
-
+运行容器
+```
+docker run -d --name bt-search-docker -p 127.0.0.1:81:80 ecat/bt-search-docker
+```
+> 可在宿主机用nginx添加一个指向docker容器的反向代理向外提供服务
