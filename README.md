@@ -53,3 +53,12 @@ location / {
    }
 ```
 > 重写需在 `location ~ \.php` 之后
+
+# docker
+容器版本，开箱即用，不需要繁琐的配置
+## 容器构建
+切换到docker目录后执行
+```
+docker build -t ecat/bt-search-docker .
+```
+
