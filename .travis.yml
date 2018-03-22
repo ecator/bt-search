@@ -8,11 +8,6 @@ script:
   - docker images
   - docker run -d --name bt-search-docker -p 127.0.0.1:81:80 ecat/bt-search-docker
   - docker ps -a
-deploy:
-  provider: script
-  script:
+after_success:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker push ecat/bt-search-docker
-  on:
-    branch: master
-
